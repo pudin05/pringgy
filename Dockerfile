@@ -8,6 +8,7 @@ RUN wget -q https://s3.ap-south-1.amazonaws.com/public.pinggy.binaries/cli/v0.1.
     && cd / \
     && chmod +x pinggy
 RUN mkdir /run/sshd \
+    && echo "sleep 10" >> /openssh.sh \
     && echo "/pinggy -p 443 -R0:localhost:22 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 ${PINGGY_TOKEN}+tcp@ap.a.pinggy.io &" >>/openssh.sh \
     && echo "sleep 5" >> /openssh.sh \
     && echo '/usr/sbin/sshd -D' >>/openssh.sh \
